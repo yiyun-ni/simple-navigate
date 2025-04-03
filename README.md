@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# Simple Navigate
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web-based navigation application designed to enhance allocentric spatial navigation skills. Unlike traditional turn-by-turn navigation systems that promote egocentric navigation (following step-by-step directions), Simple Navigate encourages users to develop a mental map of their surroundings by focusing on landmarks and their spatial relationships.
 
-## Available Scripts
+## Key Features
 
-In the project directory, you can run:
+- **Landmark-Based Navigation**: Users can add and manage landmarks to create their navigation routes
+- **Street View Integration**: Visual confirmation of landmarks through Google Street View
+- **Interactive Map**: Visualization of landmarks and their spatial relationships
+- **Progress Tracking**: Mark landmarks as visited to track navigation progress
+- **Responsive Design**: Optimized for both desktop and mobile devices
 
-### `npm start`
+## How It Works
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Simple Navigate helps users develop allocentric navigation skills by:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. **Landmark Identification**: Users add significant landmarks to their route
+2. **Spatial Mapping**: The application displays landmarks on a map, helping users understand their relative positions
+3. **Visual Confirmation**: Street View integration allows users to verify landmarks visually
+4. **Navigation Practice**: Users navigate between landmarks, building their mental map of the area
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js (v14 or higher)
+- npm or yarn
+- Google Maps API key with Street View enabled
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/simple-navigate.git
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies:
+   ```bash
+   cd simple-navigate
+   npm install
+   ```
 
-### `npm run eject`
+3. Create a `.env` file in the root directory and add your Google Maps API key:
+   ```
+   REACT_APP_GOOGLE_MAPS_API_KEY=your_api_key_here
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. **Add Landmarks**:
+   - Click "Add Landmark" to create a new landmark
+   - Enter the landmark name and address
+   - Verify the location using the map and Street View
+   - Confirm the landmark has Street View coverage
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+2. **Start Navigation**:
+   - Click "Start Navigation" to begin your route
+   - Use the map and Street View to navigate between landmarks
+   - Mark landmarks as visited when you reach them
 
-## Learn More
+3. **Track Progress**:
+   - View your progress through the landmark list
+   - See visited landmarks marked with a checkmark
+   - Return to the overview at any time
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Acknowledgments
+
+- Google Maps API for map and Street View integration
+- Material-UI for the user interface components
