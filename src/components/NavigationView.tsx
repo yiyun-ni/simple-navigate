@@ -106,8 +106,14 @@ const NavigationView: React.FC<NavigationViewProps> = ({
           Address: {currentLandmark.address}
         </Typography>
 
-        <Box sx={{ height: 400, width: '100%', mb: 3, display: 'flex', gap: 2 }}>
-          <Box sx={{ flex: 1 }}>
+        <Box sx={{ width: '100%', mb: 3, display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
+          <Box sx={{ width: '100%', order: 1, height: { xs: '50vh', md: 400 } }}>
+            <div
+              id="street-view"
+              style={{ width: '100%', height: '100%' }}
+            />
+          </Box>
+          <Box sx={{ width: '100%', order: 2, height: { xs: '50vh', md: 400 } }}>
             <GoogleMap
               mapContainerStyle={{ width: '100%', height: '100%' }}
               center={currentLandmark.position}
@@ -126,12 +132,6 @@ const NavigationView: React.FC<NavigationViewProps> = ({
                 />
               ))}
             </GoogleMap>
-          </Box>
-          <Box sx={{ flex: 1 }}>
-            <div
-              id="street-view"
-              style={{ width: '100%', height: '100%' }}
-            />
           </Box>
         </Box>
 
