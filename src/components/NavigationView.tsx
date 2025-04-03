@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   Box,
   Paper,
@@ -38,6 +38,65 @@ const NavigationView: React.FC<NavigationViewProps> = ({
   });
 
   const currentLandmark = landmarks[currentIndex];
+  const mapRef = useRef<google.maps.Map | null>(null);
+  const markersRef = useRef<google.maps.Marker[]>([]);
+  const isInitializedRef = useRef(false);
+
+  // Function to clear existing markers
+  const clearMarkers = () => {
+    if (markersRef.current.length > 0) {
+      markersRef.current.forEach(marker => marker.setMap(null));
+      markersRef.current = [];
+    }
+  };
+
+  // Function to add markers to the map
+  const addMarkers = (map: google.maps.Map) => {
+    if (!map || !landmarks.length) return;
+
+    // Only clear markers if we're not in the initial setup
+    if (isInitializedRef.current) {
+      clearMarkers();
+    }
+    
+    landmarks.forEach(landmark => {
+      const marker = new google.maps.Marker({
+        position: landmark.position,
+        map: map,
+        icon: {
+          url: landmark.id === currentLandmark.id 
+            ? 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
+            : 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+          scaledSize: new google.maps.Size(32, 32),
+        }
+      });
+      
+      markersRef.current.push(marker);
+    });
+
+    // Fit bounds with max zoom limit
+    const bounds = new google.maps.LatLngBounds();
+    landmarks.forEach(landmark => {
+      bounds.extend(landmark.position);
+    });
+    
+    map.fitBounds(bounds);
+    
+    // Add a listener to check and adjust zoom level after bounds are set
+    google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
+      const currentZoom = map.getZoom();
+      if (currentZoom && currentZoom > 18) {
+        map.setZoom(18);
+      }
+    });
+  };
+
+  // Effect to handle landmarks or currentIndex changes
+  useEffect(() => {
+    if (mapRef.current && isLoaded) {
+      addMarkers(mapRef.current);
+    }
+  }, [landmarks, currentIndex, isLoaded]);
 
   useEffect(() => {
     if (isLoaded && currentLandmark) {
@@ -121,19 +180,18 @@ const NavigationView: React.FC<NavigationViewProps> = ({
               mapContainerStyle={{ width: '100%', height: '100%' }}
               center={currentLandmark.position}
               zoom={15}
+              onLoad={(map) => {
+                mapRef.current = map;
+                isInitializedRef.current = true;
+                addMarkers(map);
+              }}
+              onUnmount={() => {
+                isInitializedRef.current = false;
+                clearMarkers();
+                mapRef.current = null;
+              }}
             >
-              {landmarks.map((landmark) => (
-                <Marker
-                  key={landmark.id}
-                  position={landmark.position}
-                  icon={{
-                    url: landmark.id === currentLandmark.id 
-                      ? 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
-                      : 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                    scaledSize: new google.maps.Size(32, 32),
-                  }}
-                />
-              ))}
+              {/* We're not using React markers anymore */}
             </GoogleMap>
           </Box>
         </Box>
