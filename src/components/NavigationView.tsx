@@ -41,19 +41,22 @@ const NavigationView: React.FC<NavigationViewProps> = ({
 
   useEffect(() => {
     if (isLoaded && currentLandmark) {
-      const panorama = new google.maps.StreetViewPanorama(
-        document.getElementById('street-view') as HTMLElement,
-        {
-          position: currentLandmark.position,
-          pov: {
-            heading: 34,
-            pitch: 10,
-          },
-          addressControl: false,
-          showRoadLabels: false,
-          zoomControl: false,
-        }
-      );
+      const streetViewElement = document.getElementById('street-view');
+      if (streetViewElement) {
+        const panorama = new google.maps.StreetViewPanorama(
+          streetViewElement,
+          {
+            position: currentLandmark.position,
+            pov: {
+              heading: 34,
+              pitch: 10,
+            },
+            addressControl: false,
+            showRoadLabels: false,
+            zoomControl: false,
+          }
+        );
+      }
     }
   }, [isLoaded, currentLandmark]);
 

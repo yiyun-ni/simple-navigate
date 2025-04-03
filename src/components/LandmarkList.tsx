@@ -81,19 +81,22 @@ const LandmarkList: React.FC<LandmarkListProps> = ({
         if (status === 'OK' && data) {
           setStreetViewAvailable(true);
           setStreetViewError(null);
-          const panorama = new google.maps.StreetViewPanorama(
-            document.getElementById('street-view') as HTMLElement,
-            {
-              position: position,
-              pov: {
-                heading: 34,
-                pitch: 10,
-              },
-              addressControl: false,
-              showRoadLabels: false,
-              zoomControl: false,
-            }
-          );
+          const streetViewElement = document.getElementById('street-view');
+          if (streetViewElement) {
+            const panorama = new google.maps.StreetViewPanorama(
+              streetViewElement,
+              {
+                position: position,
+                pov: {
+                  heading: 34,
+                  pitch: 10,
+                },
+                addressControl: false,
+                showRoadLabels: false,
+                zoomControl: false,
+              }
+            );
+          }
         } else {
           setStreetViewAvailable(false);
           setStreetViewError('Street View is not available at this location. Please select a different location.');
