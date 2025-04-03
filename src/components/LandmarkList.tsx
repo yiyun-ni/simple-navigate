@@ -297,8 +297,8 @@ const LandmarkList: React.FC<LandmarkListProps> = ({
               </Alert>
             )}
             {isLoaded && (
-              <Box sx={{ height: 300, width: '100%', display: 'flex', gap: 2 }}>
-                <Box sx={{ flex: 1 }}>
+              <Box sx={{ width: '100%', display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
+                <Box sx={{ width: '100%', order: { xs: 1, md: 2 }, height: { xs: '40vh', md: 300 } }}>
                   <GoogleMap
                     mapContainerStyle={{ width: '100%', height: '100%' }}
                     center={selectedPosition || { lat: 43.6532, lng: -79.3832 }}
@@ -310,7 +310,7 @@ const LandmarkList: React.FC<LandmarkListProps> = ({
                     )}
                   </GoogleMap>
                 </Box>
-                <Box sx={{ flex: 1 }}>
+                <Box sx={{ width: '100%', order: { xs: 2, md: 1 }, height: { xs: '40vh', md: 300 } }}>
                   {streetViewAvailable ? (
                     <div
                       id="street-view"
