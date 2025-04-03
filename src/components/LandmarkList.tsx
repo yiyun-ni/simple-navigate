@@ -298,7 +298,7 @@ const LandmarkList: React.FC<LandmarkListProps> = ({
             )}
             {isLoaded && (
               <Box sx={{ width: '100%', display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
-                <Box sx={{ width: '100%', order: { xs: 1, md: 2 }, height: { xs: '40vh', md: 300 } }}>
+                <Box sx={{ width: '100%', order: 1, height: { xs: '40vh', md: 300 } }}>
                   <GoogleMap
                     mapContainerStyle={{ width: '100%', height: '100%' }}
                     center={selectedPosition || { lat: 43.6532, lng: -79.3832 }}
@@ -310,7 +310,7 @@ const LandmarkList: React.FC<LandmarkListProps> = ({
                     )}
                   </GoogleMap>
                 </Box>
-                <Box sx={{ width: '100%', order: { xs: 2, md: 1 }, height: { xs: '40vh', md: 300 } }}>
+                <Box sx={{ width: '100%', order: 2, height: { xs: '40vh', md: 300 } }}>
                   {streetViewAvailable ? (
                     <div
                       id="street-view"
@@ -329,11 +329,14 @@ const LandmarkList: React.FC<LandmarkListProps> = ({
                         p: 2,
                       }}
                     >
-                      <Typography variant="h6" gutterBottom>
-                        Street View Preview
+                      <Typography variant="h6" color="error" gutterBottom>
+                        Street View Not Available
+                      </Typography>
+                      <Typography variant="body1" color="error" align="center" sx={{ mb: 2 }}>
+                        This location does not have Street View coverage.
                       </Typography>
                       <Typography variant="body2" color="text.secondary" align="center">
-                        Select a location on the map to preview Street View
+                        Please select a different location to add this landmark.
                       </Typography>
                     </Box>
                   )}
