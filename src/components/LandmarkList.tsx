@@ -368,6 +368,9 @@ const LandmarkList: React.FC<LandmarkListProps> = ({
                     center={selectedPosition || { lat: 43.6532, lng: -79.3832 }}
                     zoom={12}
                     onClick={handleMapClick}
+                    onLoad={(map) => {
+                      addMarkers(map);
+                    }}
                   >
                     {selectedPosition && (
                       <Marker position={selectedPosition} />
